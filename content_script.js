@@ -16,6 +16,7 @@ const main = () => {
 
     const template = document.createElement('template')
     template.innerHTML = `<iframe src="${embed}" width="100%" height="${height}" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>`
+    if (height === 80) element.parentElement.style = 'height: 80px;'
     element.replaceWith(template.content.firstChild)
   })
 }
