@@ -5,12 +5,15 @@ const main = () => {
     const spotify_url = element.getAttribute('href')
     const match = spotify_url.match(regex)
     if (!match) return
+
     const {
       type, id
     } = match.groups
     if (type == 'user') return
+
     const height = ['show', 'episode'].includes(type) ? 152 : 80
     const embed = `https://open.spotify.com/embed/${type}/${id}`
+
     const template = document.createElement('template')
     template.innerHTML = `<iframe src="${embed}" width="100%" height="${height}" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>`
     element.replaceWith(template.content.firstChild)
