@@ -6,7 +6,7 @@
   "content_scripts": [
     {
       "matches": ["https://q.trap.jp/*"],
-      "js": ["content_script.js"]
+      "js": ["content_script.js"], "css": ["content_style.css"]
     }
   ]
 }
