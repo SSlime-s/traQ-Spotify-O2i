@@ -1,0 +1,15 @@
+on:
+  release:
+    types: [released]
+
+permissions: read-all
+
+jobs:
+  webhook:
+    runs-on: ubuntu-latest
+    steps:
+    - name: post message
+      uses: SSlime-s/traq-webhook@v4.9
+      with:
+        webhook-id: ${{ secrets.WEBHOOK_ID }}
+        webhook-secret: ${{ secrets.WEBHOOK_SECRET }}
