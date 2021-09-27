@@ -1,6 +1,6 @@
 const regex = /^https?:\/\/open\.spotify\.com\/(?<type>[^/]+)\/(?<id>[^/?]+)/
 const main = () => {
-  const spotify_ogps = document.querySelectorAll("[class^=_body]>div>[class^=_messageContents]>[class^=_container] [href^='https://open.spotify.com']")
+  const spotify_ogps = document.querySelectorAll("[class^=_body]>div>[class^=_messageContents]>[class^=_container] [href^='https://open.spotify.com']:not([href^='https://open.spotify.com/user'])")
   spotify_ogps.forEach(element => {
     const spotify_url = element.getAttribute('href')
     const match = spotify_url.match(regex)
@@ -9,8 +9,6 @@ const main = () => {
     const {
       type, id
     } = match.groups
-    if (type == 'user') return
-
     const height = ['show', 'episode'].includes(type) ? 152 : 80
     const embed = `https://open.spotify.com/embed/${type}/${id}`
 
