@@ -1,7 +1,7 @@
 {
   "name": "traQ Spotify O2i",
   "description": "Spotify OGP in traQ to iframe element",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "manifest_version": 3,
   "icons": {
     "16": "icons/icon_16.png",
