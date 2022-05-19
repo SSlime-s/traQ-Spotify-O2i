@@ -1,10 +1,13 @@
 [class^=_body]>div>[class^=_messageContents]>[class^=_container] [href^='https://open.spotify.com/']:not([href^='https://open.spotify.com/user'],
+  [href^='https://open.spotify.com/blend'],
   [href^='https://open.spotify.com/show'],
-  [href^='https://open.spotify.com/episode']) {
+  [href^='https://open.spotify.com/episode'])
+{
   height: 80px;
 }
 
 [class^=_body]>div>[class^=_messageContents]>[class^=_container] [href^='https://open.spotify.com/show'],
-[class^=_body]>div>[class^=_messageContents]>[class^=_container] [href^='https://open.spotify.com/episode'] {
+[class^=_body]>div>[class^=_messageContents]>[class^=_container] [href^='https://open.spotify.com/episode']
+{
   height: 152px;
 }

@@ -1,6 +1,6 @@
 const regex = /^https?:\/\/open\.spotify\.com\/(?<type>[^/]+)\/(?<id>[^/?]+)/
 const main = () => {
-  const spotify_ogps = document.querySelectorAll("[class^=_body]>div>[class^=_messageContents]>[class^=_container] [href^='https://open.spotify.com']:not([href^='https://open.spotify.com/user'])")
+  const spotify_ogps = document.querySelectorAll("[class^=_body]>div>[class^=_messageContents]>[class^=_container] [href^='https://open.spotify.com']:not([href^='https://open.spotify.com/user'], [href^='https://open.spotify.com/blend'])")
   spotify_ogps.forEach(element => {
     const spotify_url = element.getAttribute('href')
     const match = spotify_url.match(regex)
