@@ -8,8 +8,27 @@ const SPOTIFY_OGP_URL_DENY_SELECTOR = SPOTIFY_OGP_URL_DENY.map(
 ).join(", ");
 const SPOTIFY_OGP_URL_SELECTOR = `[class^=_body]>div>[class^=_messageContents]>[class^=_container] [href^="${SPOTIFY_OGP_URL}"]:not(${SPOTIFY_OGP_URL_DENY_SELECTOR})`;
 
-const main = () => {
-  const spotify_ogps = document.querySelectorAll(SPOTIFY_OGP_URL_SELECTOR);
+/**
+ * 配列の重複を削除する
+ * Set を使っているので、多分 array の順序が保たれる
+ * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/values
+ *
+ * @template T
+ * @param {readonly T[]} array
+ * @returns {T[]}
+ */
+const unique = (array) => {
+  const set = new Set(array);
+  return [...set];
+};
+
+/**
+ * 子孫の OGP URL を置換する
+ *
+ * @param {HTMLElement} target
+ */
+const replace_ogp_url = (target) => {
+  const spotify_ogps = target.querySelectorAll(SPOTIFY_OGP_URL_SELECTOR);
 
   spotify_ogps.forEach((element) => {
     const spotify_url = element.getAttribute("href");
@@ -26,4 +45,31 @@ const main = () => {
     element.replaceWith(template.content.firstChild);
   });
 };
-setInterval(main, 1000);
+
+/**
+ * MutationObserver のコールバック
+ * DOM の追加を監視して OGP URL を置換する
+ * @see https://developer.mozilla.org/ja/docs/Web/API/MutationObserver
+ *
+ * @param {readonly MutationRecord[]} mutationsList
+ * @param {MutationObserver} observer
+ */
+const callback = (mutationsList, observer) => {
+  /**
+   * @type {HTMLElement[]}
+   */
+  const unique_target = unique(
+    mutationsList
+      .filter((m) => m.type === "childList")
+      .filter((m) => m.addedNodes.length > 0)
+      .flatMap((m) => Array.from(m.addedNodes))
+      .filter((t) => t instanceof HTMLElement)
+  );
+
+  unique_target.forEach(replace_ogp_url);
+};
+
+const observer = new MutationObserver(callback);
+observer.observe(document.body, { childList: true, subtree: true });
+
+replace_ogp_url(document.body);
