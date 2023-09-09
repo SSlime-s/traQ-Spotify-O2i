@@ -1,8 +1,8 @@
 [class^=_body]>div>[class^=_messageContents]>[class^=_container] [href^='https://open.spotify.com/']:not(
-  [href~='/user/'],
-  [href~='/blend/'],
-  [href~='/show/'],
-  [href~='/episode/']) {
+  [href*='/user/'],
+  [href*='/blend/'],
+  [href*='/show/'],
+  [href*='/episode/']) {
   height: 80px;
 }
 
@@ -10,11 +10,11 @@
   > div
   > [class^="_messageContents"]
   > [class^="_container"]
-  [href~="/show/"],
+  [href*="/show/"],
 [class^="_body"]
   > div
   > [class^="_messageContents"]
   > [class^="_container"]
-  [href~="/episode/"] {
+  [href*="/episode/"] {
   height: 152px;
 }
